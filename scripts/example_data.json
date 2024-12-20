@@ -1,0 +1,24 @@
+{
+  "id": 1,
+  "name": "Example",
+  "modules": [
+    {
+      "module_id": 10,
+      "description": "Module 10 description",
+      "items": [
+        {"item_id": 100, "value": "One Hundred"},
+        {"item_id": 200, "value": "Two Hundred"},
+        {"item_id": 300, "value": "Three Hundred"}
+      ]
+    },
+    {
+      "module_id": 20,
+      "description": "Module 20 description",
+      "items": []
+    }
+  ],
+  "metadata": {
+    "created": "2024-12-20",
+    "tags": ["test", "example"]
+  }
+}

@@ -1,0 +1,144 @@
+[project]
+name = "uv_build_pmt"
+description = "A repo to reproduce an issue with uv build."
+readme = "README.md"
+keywords = [
+  "uv_build_pmt uv bug",
+]
+license = { file = "LICENSE" }
+authors = [
+  { name = "Joris Snellenburg", email = "171338297+jsnel-ct@users.noreply.github.com" },
+]
+requires-python = ">=3.10"
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: Other/Proprietary License",
+  "Private :: Do Not Upload",
+  "Natural Language :: English",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+urls.Source = "https://github.com/jsnel-ct/uv_build_pmt"
+urls.Tracker = "https://github.com/jsnel-ct/uv_build_pmt/issues"
+
+dynamic = [
+  "version",
+]
+dependencies = [
+  "numpy>=1.21",
+  "pydantic>=2.1",
+  "typing-extensions>=3.10",
+  "xmltodict>=0.13",
+]
+[project.optional-dependencies]
+dev = [
+  "uv_build_pmt[test]",
+  "rich>12.2",
+]
+test = [
+  "coverage>=6.2",
+  "pytest>=6.2.5",
+  "pytest-cov>=3",
+  "tox>=3.5.2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/uv_build_pmt"]
+
+[tool.hatch.version]
+path = "src/uv_build_pmt/__init__.py"
+
+[tool.hatch.build]
+only-include = ["src"]
+sources = ["src"]
+
+[tool.hatch.envs.default]
+features = ["dev"]
+
+[tool.black]
+line-length = 99
+target-version = ['py310']
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.coverage.run]
+branch = true
+include = ['uv_build_pmt/*']
+omit = [
+  'src/uv_build_pmt/__init__.py',
+  'tests/*',
+  # comment the above line if you want to see if all tests did run
+]
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_lines = [
+  # Have to re-enable the standard pragma
+  'pragma: no cover',
+
+  # Don't complain about missing debug-only code:
+  'def __repr__',
+  'if self\.debug',
+
+  # Don't complain if tests don't hit defensive assertion code:
+  'raise AssertionError',
+  'raise NotImplementedError',
+
+  # Don't complain if non-runnable code isn't run:
+  'if 0:',
+  'if __name__ == .__main__.:',
+  # only accessible during typechecking
+  'if TYPE_CHECKING:',
+]
+
+[tool.mypy]
+exclude = "^docs/"
+ignore_missing_imports = true
+scripts_are_modules = true
+show_error_codes = true
+warn_unused_configs = true
+warn_unused_ignores = true
+strict_equality = true
+
+[tool.darglint]
+docstring_style = "numpy"
+
+[tool.pydocstyle]
+convention = "numpy"
+
+[tool.aliases]
+test = "pytest"
+
+[tool.rstcheck]
+ignore_directives = "autoattribute,autoclass,autoexception,autofunction,automethod,automodule,highlight"
+
+[tool.interrogate]
+exclude = ["docs", "tests"]
+ignore-init-module = true
+fail-under = 50
+
+[dependency-groups]
+dev = [
+  "uv_build_pmt[test]",
+  "rich>=12.2",
+  "ipykernel>=6.29.5",
+]
