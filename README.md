@@ -27,6 +27,7 @@ When building this library package using `uv build` two files are created in dis
 But the `.whl` does not contain the sources. So when you install this in a venv and try to import the package, you get an error.
 
 ```shell
+uv build
 uv pip install --force-reinstall .\dist\uv_build_pmt-0.1.0-py3-none-any.whl
 python -c 'import uv_build_pmt'
 ```
